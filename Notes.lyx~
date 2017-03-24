@@ -1,0 +1,491 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass ctex-article
+\begin_preamble
+% 如果没有这一句命令，XeTeX会出错，原因参见
+% http://bbs.ctex.org/viewthread.php?tid=60547
+\DeclareRobustCommand\nobreakspace{\leavevmode\nobreak\ }
+\end_preamble
+\options UTF8
+\use_default_options true
+\maintain_unincluded_children false
+\language chinese-simplified
+\language_package none
+\inputencoding utf8-plain
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format pdf4
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Notes
+\end_layout
+
+\begin_layout Section
+Classification vs.
+ Regression
+\end_layout
+
+\begin_layout Subsection
+Gradient Decent
+\end_layout
+
+\begin_layout Standard
+找
+\begin_inset Formula $J(\theta)$
+\end_inset
+
+ 的最小值，
+\begin_inset Formula $\theta\leftarrow\theta-\alpha\dfrac{\partial J}{\partial\theta},\;\alpha\stackrel{\triangle}{=}\text{learning rate}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Regression (Linear Regression)
+\end_layout
+
+\begin_layout Subparagraph
+– 预测连续值
+\end_layout
+
+\begin_layout Standard
+设
+\begin_inset Formula $X=\left[\begin{matrix}x_{0}^{(1)},x_{1}^{(1)},\cdots x_{n}^{(1)}\\
+\vdots\\
+x_{0}^{(m)},x_{1}^{(m)},\cdots x_{n}^{(m)}
+\end{matrix}\right](n\text{ features},m\text{ training datas})$
+\end_inset
+
+, 
+\begin_inset Formula $y\in\mathbb{R}^{m}$
+\end_inset
+
+= 训练数据答案
+\end_layout
+
+\begin_layout Standard
+设 
+\begin_inset Formula $\theta=\left[\begin{matrix}\theta_{0}\\
+\vdots\\
+\theta_{m}
+\end{matrix}\right]$
+\end_inset
+
+（线性方程的参数）, 
+\begin_inset Formula $\theta$
+\end_inset
+
+下的预测值为
+\begin_inset Formula $p=X\cdot\theta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subparagraph
+cost function 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $J(\theta)=\dfrac{1}{2m}\left\Vert y-p\right\Vert ^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\dfrac{\partial J}{\partial\theta}=\dfrac{1}{m}X^{T}(p-y)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+normal equation 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\theta_{ans}=(XX^{T})^{-1}X^{T}y$
+\end_inset
+
+，如果不可逆，说明有冗余features。
+\end_layout
+
+\begin_layout Standard
+feature scalling, 
+\begin_inset Formula $X^{(i)}\leftarrow X^{(i)}-\text{avg}$
+\end_inset
+
+; 
+\begin_inset Formula $X^{(i)}\leftarrow\dfrac{X^{(i)}}{\text{std\_deviation or (max-min)}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Classification (Logistic Regression)
+\end_layout
+
+\begin_layout Subparagraph
+– 预测离散值
+\end_layout
+
+\begin_layout Standard
+预测0-1方法：
+\end_layout
+
+\begin_layout Standard
+Sigmoid Function 
+\begin_inset Formula $g:R\rightarrow(0,1),\;g(x)=\dfrac{1}{1+e^{-x}}=P(ans=1)=1-P(ans=0)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+let 
+\begin_inset Formula $h=g(X\theta)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+cost function 
+\begin_inset Formula $J(\theta)=-\dfrac{1}{m}\left(y^{T}\ln h+(1-y)^{T}\ln(1-h)\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+每个值
+\begin_inset Formula $h^{(i)}$
+\end_inset
+
+对cost function的贡献为
+\begin_inset Formula 
+\begin{align*}
+\begin{cases}
+-\ln h^{(i)} & \text{if }y^{(i)}=1\\
+-\ln(1-h^{(i)}) & \text{if }y^{(i)}=0
+\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\dfrac{\partial J}{\partial\theta}=\dfrac{1}{m}X^{T}(h-y)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+normal equation 
+\begin_inset Formula $\theta_{ans}=$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+预测
+\begin_inset Formula $n$
+\end_inset
+
+个值？
+\end_layout
+
+\begin_layout Standard
+one vs.
+ all 对于每个预测值
+\begin_inset Formula $k$
+\end_inset
+
+，在训练集训练
+\begin_inset Formula $n$
+\end_inset
+
+个classifier，训练第
+\begin_inset Formula $k$
+\end_inset
+
+个时将
+\begin_inset Formula $ans=k$
+\end_inset
+
+当作1，其它当作0。作预测用
+\begin_inset Formula $k$
+\end_inset
+
+个classifier计算
+\begin_inset Formula $P(ans=k)$
+\end_inset
+
+，找出概率最大的
+\begin_inset Formula $k$
+\end_inset
+
+，即为答案。
+\end_layout
+
+\begin_layout Subsection
+Regularization
+\end_layout
+
+\begin_layout Standard
+– prevent over-fitting.
+\end_layout
+
+\begin_layout Standard
+cost function 
+\begin_inset Formula $J'(\theta)=J(\theta)+\dfrac{1}{2m}{\displaystyle \sum_{i=1}^{m}\theta_{i}^{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+此时，linear regression normal equation 
+\begin_inset Formula $\theta=\left(X^{T}X+\lambda\cdot L\right)^{-1}X^{T}y$
+\end_inset
+
+, where 
+\begin_inset Formula $L=\begin{bmatrix}0\\
+ & 1\\
+ &  & \ddots\\
+ &  &  & 1
+\end{bmatrix}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Neuron Network
+\end_layout
+
+\begin_layout Standard
+– (
+\begin_inset Formula $k+1$
+\end_inset
+
+)-th layer 
+\begin_inset Formula $a^{(k+1)}=g(\Theta^{(k)}[1;\,a^{(k)}])$
+\end_inset
+
+ (Forward propagation)
+\end_layout
+
+\begin_layout Standard
+activation function: 
+\begin_inset Formula $g(z)=\dfrac{1}{1+e^{-z}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subparagraph
+– Back propagation (Calculate 
+\begin_inset Formula $\dfrac{\partial J(\Theta)}{\partial\Theta_{ij}^{(k)}}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\delta_{i}^{(k)}\stackrel{def}{=}\dfrac{\partial J}{\partial z_{i}^{(k)}}$
+\end_inset
+
+, (
+\begin_inset Formula $z_{i}^{(k)}=\text{第}k\text{层第}i\text{个节点经过激活函数之前的值}$
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\delta^{(k)}=\left(\Theta^{(k)}\right)^{T}\delta^{(k+1)}.*g'(a^{(k+1)}),\;\delta^{(L)}=\dfrac{\partial J}{\partial z^{(L)}}=\dfrac{\partial J}{\partial a^{(L)}}\cdot\dfrac{\partial a^{(L)}}{\partial z^{(L)}}=y-a^{(L)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Evaluating a learning algo.
+\end_layout
+
+\begin_layout Standard
+为了选择最佳的多项式次数
+\begin_inset Formula $d$
+\end_inset
+
+，将训练集分成三个部分：60%Training set，20%Cross validation set，20%Test Set。
+\end_layout
+
+\begin_layout Standard
+对于每个多项式系数
+\begin_inset Formula $d$
+\end_inset
+
+，我们先在Training set上学习出最佳的
+\begin_inset Formula $\Theta^{(d)}$
+\end_inset
+
+。之后，选出
+\begin_inset Formula $J_{\text{cross}}(\Theta^{(d)})$
+\end_inset
+
+最小的
+\begin_inset Formula $d$
+\end_inset
+
+。然后我们用
+\begin_inset Formula $J_{test}(\Theta^{(d)})$
+\end_inset
+
+来测量这个模型的误差值。
+\end_layout
+
+\begin_layout Standard
+为什么不直接用Test set选取最佳
+\begin_inset Formula $d$
+\end_inset
+
+？因为我们若选取使得
+\begin_inset Formula $J_{\text{test}}(\Theta^{(d)})$
+\end_inset
+
+最小的
+\begin_inset Formula $d$
+\end_inset
+
+，可能使
+\begin_inset Formula $J_{\text{test}}$
+\end_inset
+
+过于小了（多fit了一个
+\begin_inset Formula $d$
+\end_inset
+
+参数）。
+\end_layout
+
+\begin_layout Subsection
+Bias vs.
+ variance
+\end_layout
+
+\begin_layout Standard
+Bias (underfit) problem – 
+\begin_inset Formula $J_{\text{train}}(\Theta)$
+\end_inset
+
+ will be high, 
+\begin_inset Formula $J_{\text{CV}}(\Theta)\approx J_{\text{Train}}(\Theta)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+variance(overfit) problem – 
+\begin_inset Formula $J_{\text{Train}}(\Theta)$
+\end_inset
+
+ will be low, 
+\begin_inset Formula $J_{\text{CV}}\gg J_{\text{Train}}(\Theta)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename pasted1.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+小结
+\end_layout
+
+\begin_layout Standard
+本文档使用article (C\SpecialChar TeX
+)文档类，语言设置为简体中文，编码使用UTF8，字体用Adobe中文字体，输出类型设置为Xe\SpecialChar TeX
+。编译的时候中文与英文之间会自动加上空
+格，方便阅读。
+\end_layout
+
+\end_body
+\end_document
