@@ -1,13 +1,13 @@
-#Notes
+# Notes
 
-#1 Classification vs. Regression
+# 1 Classification vs. Regression
 
-##1.1 Gradient Decent
+## 1.1 Gradient Decent
 
 找$J(\theta)$ 的最小值，$\theta\leftarrow\theta-\alpha\dfrac{\partial J}{\partial\theta},\;\alpha\stackrel{\triangle}{=}\text{learning rate}
 $.
 
-##1.2 Regression (Linear Regression)
+## 1.2 Regression (Linear Regression)
 
 __– 预测连续值__
 
