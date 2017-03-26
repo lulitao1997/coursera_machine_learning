@@ -145,3 +145,5 @@ __Diagnosing Neural Networks__
 - A neural network with fewer parameters is prone to underfitting. It is also computationally cheaper.
 - A large neural network with more parameters is prone to overfitting. It is also computationally expensive. In this case you can use regularization (increase λ) to address the overfitting.
 Using a single hidden layer is a good starting default. You can train your neural network on a number of hidden layers using your cross validation set. You can then select the one that performs best.
+
+** 注意，训练的时候用lambda，计算training error， cv error时不用lambda**
