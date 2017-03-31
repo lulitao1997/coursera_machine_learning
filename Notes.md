@@ -146,4 +146,51 @@ __Diagnosing Neural Networks__
 - A large neural network with more parameters is prone to overfitting. It is also computationally expensive. In this case you can use regularization (increase λ) to address the overfitting.
 Using a single hidden layer is a good starting default. You can train your neural network on a number of hidden layers using your cross validation set. You can then select the one that performs best.
 
-** 注意，训练的时候用lambda，计算training error， cv error时不用lambda**
+** 注意，训练的时候用lambda，计算training error， cv error时不用lambda **
+
+## 2.5 ...
+
+
+## 2.6 Error Metrics for Skewed classes
+accuarcy rate (not good) e.g. 0.5% cancer, 99% accuracy
+but y=0 get 99.5% accuracy
+Don't know whether improved or not, because predict 0 more often get higher accuracy.
+
+|           | actual 1       | actual 0        |
+|-----------|----------------|-----------------|
+| predict 1 | True Positive  | False Positive  | 
+| predict 0 | False Negative | True Negative   | 
+
+__Precision__
+True positives / predicted postive
+
+__Recall__ 
+True positives / actual positives
+
+evaluating algo by $\dfrac{2PR}{P+R}$
+
+## Large Training Data
+-- will help if using a low bias algo (e.g. regression with many features, multi-layer NN)
+
+can human exp predict y using X ? (determining whether have enough features)
+
+# 3 Support Vector Machine (SVM)
+
+![cost0/1](http://i.imgur.com/tXCt9kO.png "cost0/1")
+$$
+J(\theta)=\min_{\theta}C\sum_{i=1}^{m}\left(y^{(i)}\text{cost}_{1}(\theta^{T}x^{(i)})+(1-y^{(i)})\text{cost}_{0}(\theta^{T}x^{(i)})\right)+\dfrac 12\sum_{i=1}^{m}{\theta_i^2}
+$$
+
+a large margin classifier (means that the decision boundery has large distence from training points)
+
+### cost function
+__explain:__
+C很大时，原问题等价于
+
+![prob equation](http://i.imgur.com/oX5CD8v.png "prob equa")
+
+decision boundry, represented by a vector $\overrightarrow{n}$
+
+$\overrightarrow{n}\perp\theta,\;\theta^{T}x^{(i)}=x^{(i)}\text{在}$
+$\theta^{T}x^{(i)}=\left(x^{(i)}\text{在}\theta\text{上的投影}\right)\times\left\Vert \theta\right\Vert =\left(x^{(i)}\text{与}\overrightarrow{n}\text{的距离}\right)\times\left\Vert \theta\right\Vert $
+满足等价问题的$\theta$，decision boundary 与training example的距离会大。
